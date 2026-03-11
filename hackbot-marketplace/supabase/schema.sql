@@ -213,8 +213,46 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- ─── Storage Bucket ─────────────────────────────────────────
--- Create a storage bucket for plugin files (run in Dashboard > Storage)
--- Bucket name: "plugins"
--- Public: false
--- File size limit: 50MB
--- Allowed MIME types: application/zip, application/x-tar, application/gzip, application/x-python-code, text/x-python
+-- Create the "plugins" storage bucket for plugin files
+INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+VALUES (
+  'plugins',
+  'plugins',
+  false,
+  52428800, -- 50MB
+  ARRAY['application/zip', 'application/x-tar', 'application/gzip', 'application/x-python-code', 'text/x-python', 'application/octet-stream']
+)
+ON CONFLICT (id) DO NOTHING;
+
+-- Allow authenticated users to upload to their own folder
+CREATE POLICY "Users can upload plugin files"
+  ON storage.objects FOR INSERT
+  TO authenticated
+  WITH CHECK (
+    bucket_id = 'plugins'
+    AND (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+-- Allow authenticated users to update their own files
+CREATE POLICY "Users can update own plugin files"
+  ON storage.objects FOR UPDATE
+  TO authenticated
+  USING (
+    bucket_id = 'plugins'
+    AND (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+-- Allow authenticated users to delete their own files
+CREATE POLICY "Users can delete own plugin files"
+  ON storage.objects FOR DELETE
+  TO authenticated
+  USING (
+    bucket_id = 'plugins'
+    AND (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+-- Allow anyone to read/download plugin files
+CREATE POLICY "Anyone can read plugin files"
+  ON storage.objects FOR SELECT
+  TO public
+  USING (bucket_id = 'plugins');
