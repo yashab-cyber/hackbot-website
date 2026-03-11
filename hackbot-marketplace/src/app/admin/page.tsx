@@ -117,9 +117,9 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen pt-24 pb-24">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center">
               <Shield className="w-6 h-6 text-red-400" />
@@ -150,7 +150,7 @@ export default function AdminDashboard() {
         )}
 
         {/* Tabs */}
-        <div className="flex items-center gap-1 mb-6 bg-hb-card border border-hb-border rounded-xl p-1">
+        <div className="flex items-center gap-1 mb-6 bg-hb-card border border-hb-border rounded-xl p-1 overflow-x-auto">
           {([
             { key: "pending", label: "Pending Review", icon: Clock, count: stats?.pendingPlugins },
             { key: "approved", label: "Approved", icon: CheckCircle, count: stats?.approvedPlugins },
@@ -160,7 +160,7 @@ export default function AdminDashboard() {
             <button
               key={key}
               onClick={() => setTab(key)}
-              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+              className={`flex-1 flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
                 tab === key
                   ? "bg-hb-accent text-hb-bg"
                   : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -192,10 +192,10 @@ export default function AdminDashboard() {
           ) : (
             <div className="divide-y divide-hb-border/50">
               {plugins.map((plugin) => (
-                <div key={plugin.id} className="p-5 hover:bg-white/[0.02] transition-colors">
-                  <div className="flex items-start gap-4">
+                <div key={plugin.id} className="p-4 sm:p-5 hover:bg-white/[0.02] transition-colors">
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
                     {/* Plugin Icon */}
-                    <div className="w-12 h-12 rounded-xl bg-hb-accent/10 border border-hb-accent/20 flex items-center justify-center text-xl shrink-0">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-hb-accent/10 border border-hb-accent/20 flex items-center justify-center text-lg sm:text-xl shrink-0">
                       {categoryIcon(plugin.category)}
                     </div>
 
@@ -241,7 +241,7 @@ export default function AdminDashboard() {
 
                       <p className="text-sm text-gray-400 mb-2 line-clamp-1">{plugin.description}</p>
 
-                      <div className="flex items-center gap-4 text-xs text-gray-500">
+                      <div className="flex items-center flex-wrap gap-3 sm:gap-4 text-xs text-gray-500">
                         <span className="flex items-center gap-1">
                           {plugin.author_avatar_url ? (
                             <Image src={plugin.author_avatar_url} alt="" width={16} height={16} className="rounded-full" />
@@ -272,7 +272,7 @@ export default function AdminDashboard() {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex items-center gap-2 shrink-0">
+                    <div className="flex items-center gap-1 sm:gap-2 shrink-0 self-start sm:self-auto">
                       {actionLoading === plugin.id ? (
                         <Loader2 size={18} className="text-gray-400 animate-spin" />
                       ) : (

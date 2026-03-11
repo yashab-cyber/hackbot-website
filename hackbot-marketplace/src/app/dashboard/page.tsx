@@ -94,8 +94,8 @@ export default function DashboardPage() {
     <div className="min-h-screen pt-24 pb-24">
       <div className="max-w-6xl mx-auto px-6">
         {/* Profile Header */}
-        <div className="bg-hb-card border border-hb-border rounded-xl p-6 mb-6">
-          <div className="flex items-center justify-between">
+        <div className="bg-hb-card border border-hb-border rounded-xl p-4 sm:p-6 mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               {avatarUrl ? (
                 <Image
@@ -115,10 +115,10 @@ export default function DashboardPage() {
                 <p className="text-sm text-gray-500">{user.email}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
               <Link
                 href="/plugins/upload"
-                className="flex items-center gap-2 px-4 py-2 bg-hb-accent text-hb-bg font-semibold rounded-lg text-sm hover:shadow-[0_0_20px_rgba(0,255,136,0.2)] transition-all"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-hb-accent text-hb-bg font-semibold rounded-lg text-sm hover:shadow-[0_0_20px_rgba(0,255,136,0.2)] transition-all"
               >
                 <Upload size={16} /> Upload Plugin
               </Link>
@@ -167,7 +167,7 @@ export default function DashboardPage() {
               {plugins.map((plugin) => (
                 <div
                   key={plugin.id}
-                  className="px-6 py-4 flex items-center justify-between hover:bg-white/[0.02] transition-colors"
+                  className="px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-white/[0.02] transition-colors"
                 >
                   <div className="flex items-center gap-3 flex-1 min-w-0">
                     <div className="w-10 h-10 rounded-lg bg-hb-accent/10 border border-hb-accent/20 flex items-center justify-center text-lg shrink-0">
@@ -186,11 +186,11 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-6 text-sm text-gray-500">
-                    <span className="flex items-center gap-1 hidden sm:flex">
+                  <div className="flex items-center gap-6 text-sm text-gray-500 pl-13 sm:pl-0">
+                    <span className="flex items-center gap-1">
                       <Download size={14} /> {plugin.downloads}
                     </span>
-                    <span className="flex items-center gap-1 hidden sm:flex">
+                    <span className="flex items-center gap-1">
                       <Star size={14} /> {plugin.stars}
                     </span>
                     <div className="flex items-center gap-1">

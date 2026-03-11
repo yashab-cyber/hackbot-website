@@ -146,7 +146,7 @@ export default function HomePage() {
             </div>
           </motion.div>
 
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} className="text-6xl sm:text-8xl font-black tracking-tighter mb-3">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-3">
             <span className="glitch-text">Hack</span><span className="text-hb-accent neon-text">Bot</span>
           </motion.h1>
 
@@ -175,16 +175,16 @@ export default function HomePage() {
             ))}
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.5 }} className="flex justify-center flex-wrap gap-4 mb-14">
-            <Link href="/marketplace" className="group px-8 py-4 bg-hb-accent text-hb-bg font-bold rounded-xl hover:shadow-[0_0_50px_rgba(0,255,136,0.35)] transition-all text-sm flex items-center gap-2 relative overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.5 }} className="flex justify-center flex-wrap gap-3 sm:gap-4 mb-14">
+            <Link href="/marketplace" className="group px-5 sm:px-8 py-3 sm:py-4 bg-hb-accent text-hb-bg font-bold rounded-xl hover:shadow-[0_0_50px_rgba(0,255,136,0.35)] transition-all text-xs sm:text-sm flex items-center gap-2 relative overflow-hidden">
               <span className="relative z-10 flex items-center gap-2">
                 <Puzzle size={18} /> Plugin Marketplace <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
-            <a href="https://github.com/yashab-cyber/hackbot" target="_blank" rel="noopener" className="px-8 py-4 border border-hb-accent/50 text-hb-accent font-semibold rounded-xl hover:bg-hb-accent/10 hover:border-hb-accent transition-all text-sm flex items-center gap-2">
+            <a href="https://github.com/yashab-cyber/hackbot" target="_blank" rel="noopener" className="px-5 sm:px-8 py-3 sm:py-4 border border-hb-accent/50 text-hb-accent font-semibold rounded-xl hover:bg-hb-accent/10 hover:border-hb-accent transition-all text-xs sm:text-sm flex items-center gap-2">
               <Star size={18} /> View on GitHub
             </a>
-            <a href="https://discord.gg/X2tgYHXYq" target="_blank" rel="noopener" className="px-8 py-4 bg-hb-discord/90 text-white font-semibold rounded-xl hover:bg-hb-discord hover:shadow-[0_0_30px_rgba(88,101,242,0.35)] transition-all text-sm">
+            <a href="https://discord.gg/X2tgYHXYq" target="_blank" rel="noopener" className="px-5 sm:px-8 py-3 sm:py-4 bg-hb-discord/90 text-white font-semibold rounded-xl hover:bg-hb-discord hover:shadow-[0_0_30px_rgba(88,101,242,0.35)] transition-all text-xs sm:text-sm">
               Join Discord
             </a>
           </motion.div>
@@ -199,7 +199,7 @@ export default function HomePage() {
                 <Terminal size={12} /> hackbot — bash
               </span>
             </div>
-            <div className="p-5 bg-hb-terminal font-mono text-sm leading-7 overflow-x-auto">
+            <div className="p-4 sm:p-5 bg-hb-terminal font-mono text-xs sm:text-sm leading-6 sm:leading-7 overflow-x-auto">
               <p><span className="text-hb-accent font-bold">$</span> hackbot agent scanme.nmap.org</p>
               <p className="text-hb-chat">⚡ HackBot v1.0.1 | AI Cybersecurity Assistant</p>
               <p className="text-hb-chat">🤖 Agent Mode — Autonomous security testing</p>
@@ -221,7 +221,7 @@ export default function HomePage() {
         <div className="bg-dots absolute inset-0 opacity-40 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
-            <motion.h2 variants={fadeUp} custom={0} className="text-4xl sm:text-5xl font-bold text-center mb-3">
+            <motion.h2 variants={fadeUp} custom={0} className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3">
               See HackBot in <span className="text-hb-accent neon-text">Action</span>
             </motion.h2>
             <motion.p variants={fadeUp} custom={1} className="text-center text-gray-400 max-w-xl mx-auto mb-16">
@@ -250,9 +250,10 @@ export default function HomePage() {
                   className="w-full h-auto"
                 />
               </div>
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-5 py-2 bg-hb-card border border-hb-accent/30 rounded-full text-xs text-hb-accent font-medium shadow-lg">
+              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-3 sm:px-5 py-2 bg-hb-card border border-hb-accent/30 rounded-full text-[10px] sm:text-xs text-hb-accent font-medium shadow-lg whitespace-nowrap max-w-[90vw] overflow-hidden text-ellipsis">
                 <Monitor size={14} className="inline mr-1.5" />
-                Native Desktop GUI — Dark cybersecurity theme
+                <span className="hidden sm:inline">Native Desktop GUI — Dark cybersecurity theme</span>
+                <span className="sm:hidden">Desktop GUI — Dark theme</span>
               </div>
             </motion.div>
           </motion.div>
@@ -330,7 +331,7 @@ export default function HomePage() {
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-hb-accent/10 border border-hb-accent/25 rounded-full text-xs text-hb-accent font-medium mb-5">
                       <Sparkles size={12} /> Community Powered
                     </div>
-                    <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4">
                       Plugin <span className="gradient-text">Marketplace</span>
                     </h2>
                     <p className="text-gray-400 text-lg leading-relaxed mb-8">
@@ -346,7 +347,7 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-6 text-center">
+                  <div className="grid grid-cols-3 gap-4 sm:gap-6 text-center">
                     {[
                       { v: "500+", l: "Plugins", icon: Puzzle, color: "text-hb-accent" },
                       { v: "10k+", l: "Downloads", icon: Download, color: "text-blue-400" },
@@ -354,7 +355,7 @@ export default function HomePage() {
                     ].map((s) => (
                       <div key={s.l} className="group">
                         <s.icon size={24} className={`mx-auto mb-2 ${s.color} group-hover:scale-110 transition-transform`} />
-                        <div className="text-3xl font-black text-white">{s.v}</div>
+                        <div className="text-xl sm:text-3xl font-black text-white">{s.v}</div>
                         <div className="text-xs text-gray-500 mt-1">{s.l}</div>
                       </div>
                     ))}
@@ -376,7 +377,7 @@ export default function HomePage() {
                 <Layers size={12} /> 18 Core Features
               </span>
             </motion.div>
-            <motion.h2 variants={fadeUp} custom={0} className="text-4xl sm:text-5xl font-bold text-center mb-3">
+            <motion.h2 variants={fadeUp} custom={0} className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3">
               Everything You <span className="text-hb-accent">Need</span>
             </motion.h2>
             <motion.p variants={fadeUp} custom={1} className="text-center text-gray-400 max-w-xl mx-auto mb-14">
@@ -415,7 +416,7 @@ export default function HomePage() {
                 <Zap size={12} /> Three Ways to Work
               </span>
             </motion.div>
-            <motion.h2 variants={fadeUp} custom={0} className="text-4xl sm:text-5xl font-bold text-center mb-3">Three Powerful <span className="gradient-text">Modes</span></motion.h2>
+            <motion.h2 variants={fadeUp} custom={0} className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3">Three Powerful <span className="gradient-text">Modes</span></motion.h2>
             <motion.p variants={fadeUp} custom={1} className="text-center text-gray-400 max-w-xl mx-auto mb-14">Choose the right mode for your workflow.</motion.p>
           </motion.div>
 
@@ -469,7 +470,7 @@ export default function HomePage() {
                 <Brain size={12} /> Any Model, Any Provider
               </span>
             </motion.div>
-            <motion.h2 variants={fadeUp} custom={0} className="text-4xl sm:text-5xl font-bold text-center mb-3">10 AI <span className="text-hb-accent">Providers</span></motion.h2>
+            <motion.h2 variants={fadeUp} custom={0} className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3">10 AI <span className="text-hb-accent">Providers</span></motion.h2>
             <motion.p variants={fadeUp} custom={1} className="text-center text-gray-400 max-w-xl mx-auto mb-14">
               Switch providers instantly. Use cloud APIs or run 100% locally with Ollama.
             </motion.p>
@@ -504,7 +505,7 @@ export default function HomePage() {
               <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
               <span className="ml-3 font-mono text-[11px] text-gray-500">switch providers instantly</span>
             </div>
-            <div className="p-5 bg-hb-terminal font-mono text-sm leading-7">
+            <div className="p-4 sm:p-5 bg-hb-terminal font-mono text-xs sm:text-sm leading-6 sm:leading-7">
               <p><span className="text-gray-600">$</span> <span className="text-hb-accent">hackbot</span> <span className="text-blue-400">--provider</span> ollama <span className="text-blue-400">--model</span> llama3.2</p>
               <p><span className="text-gray-600">$</span> <span className="text-hb-accent">hackbot</span> <span className="text-blue-400">--provider</span> anthropic <span className="text-blue-400">--model</span> claude-sonnet-4-20250514</p>
               <p><span className="text-gray-600">$</span> <span className="text-hb-accent">hackbot</span> <span className="text-blue-400">--provider</span> groq <span className="text-blue-400">--model</span> llama-3.3-70b-versatile</p>
@@ -524,7 +525,7 @@ export default function HomePage() {
                 <Download size={12} /> Ready in Seconds
               </span>
             </motion.div>
-            <motion.h2 variants={fadeUp} custom={0} className="text-4xl sm:text-5xl font-bold text-center mb-3">Get <span className="text-hb-accent">Started</span></motion.h2>
+            <motion.h2 variants={fadeUp} custom={0} className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3">Get <span className="text-hb-accent">Started</span></motion.h2>
             <motion.p variants={fadeUp} custom={1} className="text-center text-gray-400 max-w-xl mx-auto mb-14">
               Install HackBot in seconds. Works on Linux, macOS, and Windows.
             </motion.p>
