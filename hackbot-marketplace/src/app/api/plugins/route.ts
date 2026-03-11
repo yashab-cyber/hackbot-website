@@ -8,19 +8,32 @@ export async function GET(request: NextRequest) {
   const category = searchParams.get("category");
   const featured = searchParams.get("featured");
   const sort = searchParams.get("sort") || "downloads";
-  const limit = parseInt(searchParams.get("limit") || "50");
-  const offset = parseInt(searchParams.get("offset") || "0");
+  const rawLimit = parseInt(searchParams.get("limit") || "50");
+  const rawOffset = parseInt(searchParams.get("offset") || "0");
   const search = searchParams.get("q");
+
+  // Validate and clamp pagination params
+  const limit = Math.min(Math.max(Number.isNaN(rawLimit) ? 50 : rawLimit, 1), 100);
+  const offset = Math.max(Number.isNaN(rawOffset) ? 0 : rawOffset, 0);
 
   let query = supabase
     .from("plugins")
     .select("*", { count: "exact" })
+    .eq("is_approved", true)
     .range(offset, offset + limit - 1);
 
   // Filters
   if (category) query = query.eq("category", category);
-  if (featured === "true") query = query.eq("is_featured", true);
-  if (search) query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
+  if (featured === "true") query = query.gt("stars", 0).order("stars", { ascending: false });
+  if (search) {
+    // Sanitize search input: escape special PostgREST characters
+    const sanitized = search.replace(/[%_\\,()."']/g, "");
+    if (sanitized) {
+      query = query.or(
+        `name.ilike.%${sanitized}%,description.ilike.%${sanitized}%`
+      );
+    }
+  }
 
   // Sort
   switch (sort) {

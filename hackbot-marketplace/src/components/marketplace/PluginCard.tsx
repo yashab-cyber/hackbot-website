@@ -46,18 +46,17 @@ export default function PluginCard({ plugin }: { plugin: Plugin }) {
               {categoryIcons[plugin.category] || "🧩"}
             </div>
             <div>
-              <h3 className="font-semibold text-white group-hover:text-hb-accent transition-colors text-sm leading-tight">
-                {plugin.name}
-              </h3>
+              <div className="flex items-center gap-1.5">
+                <h3 className="font-semibold text-white group-hover:text-hb-accent transition-colors text-sm leading-tight">
+                  {plugin.name}
+                </h3>
+                {plugin.is_verified && (
+                  <Shield size={13} className="text-hb-accent shrink-0" title="Verified" />
+                )}
+              </div>
               <span className="text-xs text-gray-500 font-mono">v{plugin.version}</span>
             </div>
           </div>
-          {plugin.is_verified && (
-            <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-hb-accent/10 text-hb-accent" title="Verified">
-              <Shield size={12} />
-              <span className="text-[10px] font-medium">Verified</span>
-            </div>
-          )}
         </div>
 
         <p className="text-sm text-gray-400 line-clamp-2 leading-relaxed mb-3">

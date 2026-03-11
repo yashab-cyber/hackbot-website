@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
-import { Menu, X, LogOut, User, Upload, Package } from "lucide-react";
+import { Menu, X, LogOut, User, Upload, Package, Shield } from "lucide-react";
 
 export default function Navbar() {
   const [user, setUser] = useState<any>(null);
@@ -29,6 +29,7 @@ export default function Navbar() {
     });
 
     return () => subscription.unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-1">
           <NavLink href="/">Home</NavLink>
           <NavLink href="/marketplace">Marketplace</NavLink>
-          <NavLink href="/marketplace?featured=true">Featured</NavLink>
+          <NavLink href="/marketplace?featured=true">Top Starred</NavLink>
           <NavLink href="https://github.com/yashab-cyber/hackbot" external>
             GitHub
           </NavLink>
@@ -122,9 +123,14 @@ export default function Navbar() {
                     <DropdownLink href="/plugins/upload" icon={<Upload size={16} />}>
                       Upload Plugin
                     </DropdownLink>
-                    <DropdownLink href="/dashboard/plugins" icon={<Package size={16} />}>
+                    <DropdownLink href="/dashboard" icon={<Package size={16} />}>
                       My Plugins
                     </DropdownLink>
+                    {(username === "yashab-cyber") && (
+                      <DropdownLink href="/admin" icon={<Shield size={16} />}>
+                        Admin Dashboard
+                      </DropdownLink>
+                    )}
                   </div>
                   <div className="p-1 border-t border-hb-border">
                     <button
@@ -166,7 +172,7 @@ export default function Navbar() {
           <div className="px-6 py-4 flex flex-col gap-2">
             <MobileLink href="/" onClick={() => setMenuOpen(false)}>Home</MobileLink>
             <MobileLink href="/marketplace" onClick={() => setMenuOpen(false)}>Marketplace</MobileLink>
-            <MobileLink href="/marketplace?featured=true" onClick={() => setMenuOpen(false)}>Featured</MobileLink>
+            <MobileLink href="/marketplace?featured=true" onClick={() => setMenuOpen(false)}>Top Starred</MobileLink>
             {user ? (
               <>
                 <MobileLink href="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</MobileLink>

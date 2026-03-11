@@ -17,6 +17,7 @@ export default function PluginDetailPage() {
   const slug = params.slug as string;
   const [plugin, setPlugin] = useState<Plugin | null>(null);
   const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
   const [userStarred, setUserStarred] = useState(false);
   const [starCount, setStarCount] = useState(0);
   const supabase = createClient();
@@ -24,6 +25,7 @@ export default function PluginDetailPage() {
   useEffect(() => {
     async function fetchPlugin() {
       setLoading(true);
+      setNotFound(false);
       const { data, error } = await supabase
         .from("plugins")
         .select("*")
@@ -31,30 +33,7 @@ export default function PluginDetailPage() {
         .single();
 
       if (error || !data) {
-        // Demo fallback
-        setPlugin({
-          id: "demo-1",
-          name: slug.split("-").map((w) => w[0].toUpperCase() + w.slice(1)).join(" "),
-          slug,
-          description: "A powerful HackBot plugin for advanced cybersecurity operations.",
-          long_description: `## Overview\n\nThis plugin extends HackBot with advanced capabilities for security testing.\n\n## Features\n\n- Automated scanning and reconnaissance\n- Integration with multiple security tools\n- Real-time reporting and alerts\n- Configurable output formats\n\n## Installation\n\n\`\`\`bash\nhackbot plugin install ${slug}\n\`\`\`\n\n## Usage\n\n\`\`\`bash\nhackbot ${slug} target.com\n\`\`\``,
-          version: "1.0.0",
-          category: "scanner",
-          author_id: "demo",
-          author_username: "hackbot-community",
-          author_avatar_url: null,
-          download_url: null,
-          file_path: null,
-          file_size: 45000,
-          source_url: "https://github.com/yashab-cyber/hackbot",
-          tags: ["security", "scanner", "automation"],
-          downloads: 1234,
-          stars: 56,
-          is_verified: true,
-          is_featured: false,
-          created_at: "2026-01-15T00:00:00Z",
-          updated_at: "2026-03-01T00:00:00Z",
-        });
+        setNotFound(true);
       } else {
         setPlugin(data as Plugin);
       }
@@ -62,6 +41,7 @@ export default function PluginDetailPage() {
     }
 
     fetchPlugin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   useEffect(() => {
@@ -83,6 +63,7 @@ export default function PluginDetailPage() {
       setUserStarred(!!data);
     }
     checkStar();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [plugin]);
 
   const handleStar = async () => {
@@ -108,26 +89,23 @@ export default function PluginDetailPage() {
   const handleDownload = async () => {
     if (!plugin) return;
 
-    // Log download
-    const { data: { user } } = await supabase.auth.getUser();
-    await supabase.from("plugin_downloads").insert({
-      plugin_id: plugin.id,
-      user_id: user?.id || null,
-    });
-    await supabase.rpc("increment_downloads", { plugin_uuid: plugin.id });
+    try {
+      // Use the API to log download and get signed URL (avoids double-counting)
+      const res = await fetch(`/api/plugins/${plugin.slug}/download`, {
+        method: "POST",
+      });
+      const result = await res.json();
 
-    if (plugin.file_path) {
-      const { data } = await supabase.storage
-        .from("plugins")
-        .createSignedUrl(plugin.file_path, 60);
-      if (data?.signedUrl) {
-        window.open(data.signedUrl, "_blank");
+      if (result.download_url) {
+        window.open(result.download_url, "_blank");
+      } else if (plugin.source_url) {
+        window.open(plugin.source_url, "_blank");
       }
-    } else if (plugin.source_url) {
-      window.open(plugin.source_url, "_blank");
-    }
 
-    toast.success("Download started!");
+      toast.success("Download started!");
+    } catch {
+      toast.error("Download failed");
+    }
   };
 
   if (loading) {
@@ -142,13 +120,19 @@ export default function PluginDetailPage() {
     );
   }
 
-  if (!plugin) {
+  if (notFound || !plugin) {
     return (
       <div className="min-h-screen pt-24 text-center">
-        <h1 className="text-2xl font-bold text-white">Plugin not found</h1>
-        <Link href="/marketplace" className="text-hb-accent mt-4 inline-block">
-          Back to Marketplace
-        </Link>
+        <div className="max-w-md mx-auto">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-hb-card border border-hb-border flex items-center justify-center text-2xl">
+            🔍
+          </div>
+          <h1 className="text-2xl font-bold text-white mb-2">Plugin not found</h1>
+          <p className="text-gray-500 mb-6">The plugin you&apos;re looking for doesn&apos;t exist or has been removed.</p>
+          <Link href="/marketplace" className="inline-flex items-center gap-2 text-hb-accent hover:underline">
+            <ArrowLeft size={16} /> Back to Marketplace
+          </Link>
+        </div>
       </div>
     );
   }

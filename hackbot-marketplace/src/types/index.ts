@@ -18,6 +18,8 @@ export interface Plugin {
   stars: number;
   is_verified: boolean;
   is_featured: boolean;
+  is_approved: boolean;
+  rejection_reason: string | null;
   created_at: string;
   updated_at: string;
 }

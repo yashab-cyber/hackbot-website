@@ -6,224 +6,12 @@ import dynamic from "next/dynamic";
 import { Package } from "lucide-react";
 import PluginCard from "@/components/marketplace/PluginCard";
 import FilterBar from "@/components/marketplace/FilterBar";
-import { createClient } from "@/lib/supabase/client";
 import type { Plugin } from "@/types";
 
 const MarketplaceScene = dynamic(
   () => import("@/components/three/MarketplaceScene"),
   { ssr: false }
 );
-
-// Demo plugins for when Supabase isn't connected
-const DEMO_PLUGINS: Plugin[] = [
-  {
-    id: "1",
-    name: "Nmap Advanced Scanner",
-    slug: "nmap-advanced-scanner",
-    description: "Enhanced nmap integration with auto-target profiling, custom NSE scripts, and intelligent scan scheduling.",
-    long_description: null,
-    version: "2.1.0",
-    category: "scanner",
-    author_id: "demo",
-    author_username: "securitypro",
-    author_avatar_url: null,
-    download_url: null,
-    file_path: null,
-    file_size: 45000,
-    source_url: "https://github.com/example/nmap-advanced",
-    tags: ["nmap", "scanning", "recon", "automation"],
-    downloads: 2847,
-    stars: 156,
-    is_verified: true,
-    is_featured: true,
-    created_at: "2026-01-15T00:00:00Z",
-    updated_at: "2026-02-20T00:00:00Z",
-  },
-  {
-    id: "2",
-    name: "Subdomain Bruter",
-    slug: "subdomain-bruter",
-    description: "High-performance subdomain enumeration using multiple engines: DNS brute force, certificate transparency, and web scraping.",
-    long_description: null,
-    version: "1.5.3",
-    category: "recon",
-    author_id: "demo",
-    author_username: "recon_master",
-    author_avatar_url: null,
-    download_url: null,
-    file_path: null,
-    file_size: 32000,
-    source_url: "https://github.com/example/subdomain-bruter",
-    tags: ["subdomain", "dns", "recon", "enumeration"],
-    downloads: 1923,
-    stars: 98,
-    is_verified: true,
-    is_featured: false,
-    created_at: "2026-02-01T00:00:00Z",
-    updated_at: "2026-03-01T00:00:00Z",
-  },
-  {
-    id: "3",
-    name: "SQLi Payload Generator",
-    slug: "sqli-payload-generator",
-    description: "AI-assisted SQL injection payload generation with support for MySQL, PostgreSQL, MSSQL, and Oracle databases.",
-    long_description: null,
-    version: "1.0.0",
-    category: "exploit",
-    author_id: "demo",
-    author_username: "exploit_dev",
-    author_avatar_url: null,
-    download_url: null,
-    file_path: null,
-    file_size: 28000,
-    source_url: "https://github.com/example/sqli-payloads",
-    tags: ["sqli", "sql-injection", "exploit", "payload"],
-    downloads: 3451,
-    stars: 203,
-    is_verified: true,
-    is_featured: true,
-    created_at: "2025-12-10T00:00:00Z",
-    updated_at: "2026-02-28T00:00:00Z",
-  },
-  {
-    id: "4",
-    name: "OSINT Email Hunter",
-    slug: "osint-email-hunter",
-    description: "Discover email addresses associated with domains using public data sources, breach databases, and social media APIs.",
-    long_description: null,
-    version: "1.2.0",
-    category: "osint",
-    author_id: "demo",
-    author_username: "osint_ninja",
-    author_avatar_url: null,
-    download_url: null,
-    file_path: null,
-    file_size: 19000,
-    source_url: "https://github.com/example/email-hunter",
-    tags: ["osint", "email", "harvesting", "recon"],
-    downloads: 1567,
-    stars: 87,
-    is_verified: false,
-    is_featured: false,
-    created_at: "2026-01-20T00:00:00Z",
-    updated_at: "2026-02-15T00:00:00Z",
-  },
-  {
-    id: "5",
-    name: "PDF Report Pro",
-    slug: "pdf-report-pro",
-    description: "Professional pentest report generator with customizable templates, executive summary, charts, and compliance mapping.",
-    long_description: null,
-    version: "3.0.1",
-    category: "reporting",
-    author_id: "demo",
-    author_username: "report_guru",
-    author_avatar_url: null,
-    download_url: null,
-    file_path: null,
-    file_size: 67000,
-    source_url: "https://github.com/example/pdf-report-pro",
-    tags: ["report", "pdf", "pentest", "executive"],
-    downloads: 4201,
-    stars: 312,
-    is_verified: true,
-    is_featured: true,
-    created_at: "2025-11-05T00:00:00Z",
-    updated_at: "2026-03-02T00:00:00Z",
-  },
-  {
-    id: "6",
-    name: "Network Mapper 3D",
-    slug: "network-mapper-3d",
-    description: "Visualize network topology in 3D using WebGL. Supports nmap XML import, live discovery, and subnet clustering.",
-    long_description: null,
-    version: "1.1.0",
-    category: "network",
-    author_id: "demo",
-    author_username: "netvis",
-    author_avatar_url: null,
-    download_url: null,
-    file_path: null,
-    file_size: 82000,
-    source_url: "https://github.com/example/network-mapper-3d",
-    tags: ["network", "topology", "3d", "visualization"],
-    downloads: 982,
-    stars: 145,
-    is_verified: false,
-    is_featured: false,
-    created_at: "2026-02-10T00:00:00Z",
-    updated_at: "2026-02-28T00:00:00Z",
-  },
-  {
-    id: "7",
-    name: "XSS Finder Pro",
-    slug: "xss-finder-pro",
-    description: "Automated cross-site scripting detection with smart payload mutation, DOM-based analysis, and proof-of-concept generation.",
-    long_description: null,
-    version: "2.0.0",
-    category: "web",
-    author_id: "demo",
-    author_username: "websec_pro",
-    author_avatar_url: null,
-    download_url: null,
-    file_path: null,
-    file_size: 41000,
-    source_url: "https://github.com/example/xss-finder",
-    tags: ["xss", "web", "vulnerability", "detection"],
-    downloads: 2156,
-    stars: 178,
-    is_verified: true,
-    is_featured: false,
-    created_at: "2026-01-05T00:00:00Z",
-    updated_at: "2026-02-25T00:00:00Z",
-  },
-  {
-    id: "8",
-    name: "Hash Cracker Module",
-    slug: "hash-cracker-module",
-    description: "Integrate hashcat and john with HackBot. Auto-detect hash types, manage wordlists, and report cracked credentials.",
-    long_description: null,
-    version: "1.3.2",
-    category: "crypto",
-    author_id: "demo",
-    author_username: "crypto_hawk",
-    author_avatar_url: null,
-    download_url: null,
-    file_path: null,
-    file_size: 15000,
-    source_url: "https://github.com/example/hash-cracker",
-    tags: ["hash", "password", "cracking", "crypto"],
-    downloads: 1834,
-    stars: 91,
-    is_verified: false,
-    is_featured: false,
-    created_at: "2026-01-25T00:00:00Z",
-    updated_at: "2026-02-18T00:00:00Z",
-  },
-  {
-    id: "9",
-    name: "Memory Forensics Kit",
-    slug: "memory-forensics-kit",
-    description: "Volatility-based memory analysis plugin for HackBot. Extract processes, network connections, and malware indicators from memory dumps.",
-    long_description: null,
-    version: "1.0.0",
-    category: "forensics",
-    author_id: "demo",
-    author_username: "forensic_analyst",
-    author_avatar_url: null,
-    download_url: null,
-    file_path: null,
-    file_size: 53000,
-    source_url: "https://github.com/example/memory-forensics",
-    tags: ["forensics", "memory", "volatility", "malware"],
-    downloads: 756,
-    stars: 62,
-    is_verified: true,
-    is_featured: false,
-    created_at: "2026-02-15T00:00:00Z",
-    updated_at: "2026-03-01T00:00:00Z",
-  },
-];
 
 function MarketplaceContent() {
   const searchParams = useSearchParams();
@@ -232,46 +20,43 @@ function MarketplaceContent() {
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
   const [category, setCategory] = useState(searchParams.get("category") || "");
   const [sortBy, setSortBy] = useState("popular");
-  const supabase = createClient();
 
   useEffect(() => {
     async function fetchPlugins() {
       setLoading(true);
       try {
-        let query = supabase
-          .from("plugins")
-          .select("*")
-          .order(
-            sortBy === "newest"
-              ? "created_at"
-              : sortBy === "stars"
-              ? "stars"
-              : sortBy === "name"
-              ? "name"
-              : "downloads",
-            { ascending: sortBy === "name" }
-          );
+        const params = new URLSearchParams();
+        if (category) params.set("category", category);
+        if (searchQuery) params.set("q", searchQuery);
+        if (searchParams.get("featured")) params.set("featured", "true");
 
-        if (category) query = query.eq("category", category);
-        if (searchParams.get("featured")) query = query.eq("is_featured", true);
+        // Map client sort names to API sort names
+        const sortMap: Record<string, string> = {
+          popular: "downloads",
+          newest: "newest",
+          stars: "stars",
+          name: "name",
+        };
+        params.set("sort", sortMap[sortBy] || "downloads");
+        params.set("limit", "50");
 
-        const { data, error } = await query;
+        const res = await fetch(`/api/plugins?${params.toString()}`);
+        const result = await res.json();
 
-        if (error || !data || data.length === 0) {
-          // Use demo data when Supabase isn't configured or returns empty
-          setPlugins(DEMO_PLUGINS);
+        if (result.plugins) {
+          setPlugins(result.plugins as Plugin[]);
         } else {
-          setPlugins(data as Plugin[]);
+          setPlugins([]);
         }
       } catch {
-        // Fallback to demo data
-        setPlugins(DEMO_PLUGINS);
+        setPlugins([]);
       }
       setLoading(false);
     }
 
     fetchPlugins();
-  }, [category, sortBy, searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, sortBy, searchQuery, searchParams]);
 
   const filtered = useMemo(() => {
     if (!searchQuery) return plugins;

@@ -40,6 +40,7 @@ export default function UploadPluginPage() {
       }
     }
     checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signIn = async () => {
@@ -69,6 +70,20 @@ export default function UploadPluginPage() {
     if (!form.description.trim()) return toast.error("Description is required");
     if (form.name.length < 3) return toast.error("Name must be at least 3 characters");
     if (form.description.length < 10) return toast.error("Description must be at least 10 characters");
+
+    // File validation
+    if (file) {
+      const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+      if (file.size > MAX_FILE_SIZE) {
+        return toast.error("File size must be under 50MB");
+      }
+      const allowedExtensions = [".py", ".zip", ".tar.gz", ".tgz"];
+      const fileName = file.name.toLowerCase();
+      const hasValidExt = allowedExtensions.some((ext) => fileName.endsWith(ext));
+      if (!hasValidExt) {
+        return toast.error("Only .py, .zip, .tar.gz, and .tgz files are allowed");
+      }
+    }
 
     setLoading(true);
 
@@ -131,8 +146,8 @@ export default function UploadPluginPage() {
         return;
       }
 
-      toast.success("Plugin published successfully!");
-      router.push(`/plugins/${slug}`);
+      toast.success("Plugin submitted! It will appear in the marketplace after admin review.");
+      router.push("/dashboard");
     } catch (err) {
       toast.error("Something went wrong. Please try again.");
     }

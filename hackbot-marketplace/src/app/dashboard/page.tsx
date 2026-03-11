@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,6 +13,7 @@ import toast from "react-hot-toast";
 import type { Plugin } from "@/types";
 
 export default function DashboardPage() {
+  const router = useRouter();
   const [user, setUser] = useState<any>(null);
   const [plugins, setPlugins] = useState<Plugin[]>([]);
   const [stats, setStats] = useState({ totalDownloads: 0, totalStars: 0 });
@@ -24,7 +26,7 @@ export default function DashboardPage() {
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) {
-        window.location.href = "/";
+        router.replace("/");
         return;
       }
       setUser(user);
@@ -46,23 +48,24 @@ export default function DashboardPage() {
       setLoading(false);
     }
     loadDashboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = async (plugin: Plugin) => {
     if (!confirm(`Delete "${plugin.name}"? This cannot be undone.`)) return;
 
-    // Delete file from storage
-    if (plugin.file_path) {
-      await supabase.storage.from("plugins").remove([plugin.file_path]);
-    }
+    try {
+      const res = await fetch(`/api/plugins/${plugin.slug}`, { method: "DELETE" });
+      const result = await res.json();
 
-    const { error } = await supabase.from("plugins").delete().eq("id", plugin.id);
-
-    if (error) {
+      if (!res.ok) {
+        toast.error(result.error || "Failed to delete plugin");
+      } else {
+        setPlugins(plugins.filter((p) => p.id !== plugin.id));
+        toast.success("Plugin deleted");
+      }
+    } catch {
       toast.error("Failed to delete plugin");
-    } else {
-      setPlugins(plugins.filter((p) => p.id !== plugin.id));
-      toast.success("Plugin deleted");
     }
   };
 

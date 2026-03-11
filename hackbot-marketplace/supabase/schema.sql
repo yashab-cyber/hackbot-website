@@ -40,6 +40,8 @@ CREATE TABLE IF NOT EXISTS public.plugins (
   stars INTEGER DEFAULT 0,
   is_verified BOOLEAN DEFAULT FALSE,
   is_featured BOOLEAN DEFAULT FALSE,
+  is_approved BOOLEAN DEFAULT FALSE,
+  rejection_reason TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -185,19 +187,24 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 CREATE OR REPLACE FUNCTION public.toggle_star(p_plugin_id UUID, p_user_id UUID)
 RETURNS INTEGER AS $$
 DECLARE
-  star_exists BOOLEAN;
   new_count INTEGER;
+  rows_deleted INTEGER;
 BEGIN
-  SELECT EXISTS(
-    SELECT 1 FROM public.plugin_stars WHERE plugin_id = p_plugin_id AND user_id = p_user_id
-  ) INTO star_exists;
+  -- Try to delete first (atomic check + delete)
+  DELETE FROM public.plugin_stars
+    WHERE plugin_id = p_plugin_id AND user_id = p_user_id;
 
-  IF star_exists THEN
-    DELETE FROM public.plugin_stars WHERE plugin_id = p_plugin_id AND user_id = p_user_id;
-    UPDATE public.plugins SET stars = stars - 1 WHERE id = p_plugin_id;
+  GET DIAGNOSTICS rows_deleted = ROW_COUNT;
+
+  IF rows_deleted > 0 THEN
+    UPDATE public.plugins SET stars = GREATEST(stars - 1, 0) WHERE id = p_plugin_id;
   ELSE
-    INSERT INTO public.plugin_stars (plugin_id, user_id) VALUES (p_plugin_id, p_user_id);
-    UPDATE public.plugins SET stars = stars + 1 WHERE id = p_plugin_id;
+    INSERT INTO public.plugin_stars (plugin_id, user_id)
+      VALUES (p_plugin_id, p_user_id)
+      ON CONFLICT (plugin_id, user_id) DO NOTHING;
+    IF FOUND THEN
+      UPDATE public.plugins SET stars = stars + 1 WHERE id = p_plugin_id;
+    END IF;
   END IF;
 
   SELECT stars INTO new_count FROM public.plugins WHERE id = p_plugin_id;
