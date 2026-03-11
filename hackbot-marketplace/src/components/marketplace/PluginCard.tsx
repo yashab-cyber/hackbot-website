@@ -51,7 +51,9 @@ export default function PluginCard({ plugin }: { plugin: Plugin }) {
                   {plugin.name}
                 </h3>
                 {plugin.is_verified && (
-                  <Shield size={13} className="text-hb-accent shrink-0" title="Verified" />
+                  <span title="Verified">
+                    <Shield size={13} className="text-hb-accent shrink-0" />
+                  </span>
                 )}
               </div>
               <span className="text-xs text-gray-500 font-mono">v{plugin.version}</span>
