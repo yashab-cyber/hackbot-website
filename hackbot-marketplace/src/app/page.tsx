@@ -250,12 +250,14 @@ export default function HomePage() {
                   className="w-full h-auto"
                 />
               </div>
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-3 sm:px-5 py-2 bg-hb-card border border-hb-accent/30 rounded-full text-[10px] sm:text-xs text-hb-accent font-medium shadow-lg whitespace-nowrap max-w-[90vw] overflow-hidden text-ellipsis">
+            </motion.div>
+            <div className="flex justify-center mt-4">
+              <div className="px-3 sm:px-5 py-2 bg-hb-card border border-hb-accent/30 rounded-full text-[10px] sm:text-xs text-hb-accent font-medium shadow-lg">
                 <Monitor size={14} className="inline mr-1.5" />
                 <span className="hidden sm:inline">Native Desktop GUI — Dark cybersecurity theme</span>
                 <span className="sm:hidden">Desktop GUI — Dark theme</span>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* CLI + Settings side by side */}
