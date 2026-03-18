@@ -61,13 +61,23 @@ export default function DonatePage() {
               Join Discord
             </a>
             
-            <a
-              href="mailto:yashabalam707@gmail.com"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-medium transition-colors"
-            >
-              <Mail className="w-5 h-5" />
-              Contact Form
-            </a>
+            <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-4">
+              <a
+                href="mailto:yashabalam9@gmail.com"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-medium transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+                yashabalam9
+              </a>
+              
+              <a
+                href="mailto:yashabalam707@gmail.com"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-medium transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+                yashabalam707
+              </a>
+            </div>
           </div>
         </div>
       </div>
