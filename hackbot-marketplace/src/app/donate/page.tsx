@@ -1,4 +1,9 @@
 import { Star, MessageSquare, Mail, Heart } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const MarketplaceScene = dynamic(() => import("@/components/three/MarketplaceScene"), {
+  ssr: false,
+});
 
 export const metadata = {
   title: "Donate - HackBot",
@@ -8,7 +13,8 @@ export const metadata = {
 export default function DonatePage() {
   return (
     <div className="min-h-screen pt-24 pb-12 px-6 flex items-center justify-center relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-hb-accent/20 rounded-full blur-[100px] pointer-events-none" />
+      <MarketplaceScene />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-hb-accent/20 rounded-full blur-[100px] pointer-events-none z-0" />
       
       <div className="max-w-3xl w-full relative z-10">
         <div className="bg-hb-card/80 backdrop-blur-xl border border-hb-accent/20 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden group">
