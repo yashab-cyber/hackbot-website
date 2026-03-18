@@ -41,6 +41,7 @@ export default function Footer() {
               <FooterLink href="https://discord.gg/X2tgYHXYq" external>
                 Discord
               </FooterLink>
+              <FooterLink href="/donate">Donate</FooterLink>
               <FooterLink href="https://github.com/yashab-cyber/hackbot/issues" external>
                 Report Bug
               </FooterLink>
