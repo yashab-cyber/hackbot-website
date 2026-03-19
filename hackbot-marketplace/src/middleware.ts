@@ -27,7 +27,15 @@ export async function middleware(req: NextRequest) {
   );
 
   // Refresh the auth session if it exists
-  await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // Protect Academy Routes
+  if (!user && req.nextUrl.pathname.startsWith("/academy")) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/"; 
+    // You could append ?login=true or similar if desired
+    return NextResponse.redirect(url);
+  }
 
   return supabaseResponse;
 }
