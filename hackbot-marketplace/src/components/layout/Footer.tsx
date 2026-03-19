@@ -24,6 +24,7 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Product</h4>
             <div className="flex flex-col gap-2">
+              <FooterLink href="/academy">HackBot Academy</FooterLink>
               <FooterLink href="/marketplace">Plugin Marketplace</FooterLink>
               <FooterLink href="/marketplace?category=scanner">Scanners</FooterLink>
               <FooterLink href="/marketplace?category=recon">Recon Tools</FooterLink>

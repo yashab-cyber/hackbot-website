@@ -7,7 +7,7 @@ import Image from "next/image";
 import {
   Shield, Package, Download, Users, CheckCircle, XCircle,
   Star, Eye, Trash2, Clock, AlertTriangle, BarChart3,
-  ChevronDown, ExternalLink, Loader2, ArrowLeft,
+  ChevronDown, ExternalLink, Loader2, ArrowLeft, BookOpen, Award
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { isAdmin, getAdminUsername } from "@/lib/admin";
@@ -22,6 +22,8 @@ interface Stats {
   rejectedPlugins: number;
   totalUsers: number;
   totalDownloads: number;
+  totalCourses: number;
+  totalCertificates: number;
 }
 
 type TabFilter = "all" | "pending" | "approved" | "rejected";
@@ -139,7 +141,9 @@ export default function AdminDashboard() {
 
         {/* Stats Grid */}
         {stats && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 mb-8">
+            <StatCard icon={BookOpen} label="Courses" value={stats.totalCourses} color="text-indigo-400" bg="bg-indigo-400/10 border-indigo-400/20" />
+            <StatCard icon={Award} label="Certificates" value={stats.totalCertificates} color="text-pink-400" bg="bg-pink-400/10 border-pink-400/20" />
             <StatCard icon={Package} label="Total Plugins" value={stats.totalPlugins} color="text-blue-400" bg="bg-blue-400/10 border-blue-400/20" />
             <StatCard icon={Clock} label="Pending" value={stats.pendingPlugins} color="text-amber-400" bg="bg-amber-400/10 border-amber-400/20" />
             <StatCard icon={CheckCircle} label="Approved" value={stats.approvedPlugins} color="text-green-400" bg="bg-green-400/10 border-green-400/20" />

@@ -19,11 +19,15 @@ export async function GET() {
     { count: pendingPlugins },
     { count: approvedPlugins },
     { count: totalUsers },
+    { count: totalCourses },
+    { count: totalCertificates },
   ] = await Promise.all([
     supabase.from("plugins").select("*", { count: "exact", head: true }),
     supabase.from("plugins").select("*", { count: "exact", head: true }).eq("is_approved", false).is("rejection_reason", null),
     supabase.from("plugins").select("*", { count: "exact", head: true }).eq("is_approved", true),
     supabase.from("profiles").select("*", { count: "exact", head: true }),
+    supabase.from("courses").select("*", { count: "exact", head: true }),
+    supabase.from("certificates").select("*", { count: "exact", head: true }),
   ]);
 
   // Get total downloads
@@ -39,5 +43,7 @@ export async function GET() {
     rejectedPlugins: (totalPlugins || 0) - (pendingPlugins || 0) - (approvedPlugins || 0),
     totalUsers: totalUsers || 0,
     totalDownloads,
+    totalCourses: totalCourses || 0,
+    totalCertificates: totalCertificates || 0,
   });
 }

@@ -77,6 +77,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-1">
           <NavLink href="/">Home</NavLink>
           <NavLink href="/marketplace">Marketplace</NavLink>
+          <NavLink href="/academy">Academy</NavLink>
           <NavLink href="/marketplace?featured=true">Top Starred</NavLink>
           <NavLink href="/donate">Donate</NavLink>
           <NavLink href="https://github.com/yashab-cyber/hackbot" external>
@@ -173,6 +174,7 @@ export default function Navbar() {
           <div className="px-6 py-4 flex flex-col gap-2">
             <MobileLink href="/" onClick={() => setMenuOpen(false)}>Home</MobileLink>
             <MobileLink href="/marketplace" onClick={() => setMenuOpen(false)}>Marketplace</MobileLink>
+            <MobileLink href="/academy" onClick={() => setMenuOpen(false)}>Academy</MobileLink>
             <MobileLink href="/marketplace?featured=true" onClick={() => setMenuOpen(false)}>Top Starred</MobileLink>
             <MobileLink href="/donate" onClick={() => setMenuOpen(false)}>Donate</MobileLink>
             {user ? (

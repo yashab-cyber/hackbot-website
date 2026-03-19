@@ -82,3 +82,34 @@ export const PLUGIN_CATEGORIES: { value: PluginCategory; label: string; icon: st
   { value: "forensics", label: "Forensics", icon: "🔬" },
   { value: "misc", label: "Miscellaneous", icon: "🧩" },
 ];
+
+export interface Course {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  created_at: string;
+}
+
+export interface ExamQuestion {
+  question: string;
+  options: string[];
+  correct_option: number;
+}
+
+export interface Exam {
+  id: string;
+  course_id: string;
+  title: string;
+  passing_score: number;
+  questions: ExamQuestion[];
+  created_at: string;
+}
+
+export interface Certificate {
+  id: string;
+  user_id: string;
+  course_id: string;
+  student_name: string;
+  issued_at: string;
+}

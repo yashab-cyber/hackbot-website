@@ -256,3 +256,61 @@ CREATE POLICY "Anyone can read plugin files"
   ON storage.objects FOR SELECT
   TO public
   USING (bucket_id = 'plugins');
+
+-- =============================================================
+-- HackBot Academy Schema Additions
+-- =============================================================
+
+-- ─── Courses Table ──────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS public.courses (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─── Exams Table ────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS public.exams (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  course_id UUID REFERENCES public.courses(id) ON DELETE CASCADE NOT NULL,
+  title TEXT NOT NULL,
+  passing_score INTEGER NOT NULL DEFAULT 70,
+  questions JSONB NOT NULL DEFAULT '[]'::jsonb,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─── Certificates Table ─────────────────────────────────────
+CREATE TABLE IF NOT EXISTS public.certificates (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+  course_id UUID REFERENCES public.courses(id) ON DELETE CASCADE NOT NULL,
+  student_name TEXT NOT NULL,
+  issued_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─── Indexes ────────────────────────────────────────────────
+CREATE INDEX IF NOT EXISTS idx_exams_course ON public.exams(course_id);
+CREATE INDEX IF NOT EXISTS idx_certificates_user ON public.certificates(user_id);
+CREATE INDEX IF NOT EXISTS idx_certificates_course ON public.certificates(course_id);
+
+-- ─── Row Level Security ─────────────────────────────────────
+ALTER TABLE public.courses ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.exams ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.certificates ENABLE ROW LEVEL SECURITY;
+
+-- Courses: public read
+CREATE POLICY "Courses are viewable by everyone" ON public.courses
+  FOR SELECT USING (true);
+
+-- Exams: public read
+CREATE POLICY "Exams are viewable by everyone" ON public.exams
+  FOR SELECT USING (true);
+
+-- Certificates: public read, authenticated create for self
+CREATE POLICY "Certificates are viewable by everyone" ON public.certificates
+  FOR SELECT USING (true);
+
+CREATE POLICY "Authenticated users can create certificates" ON public.certificates
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
