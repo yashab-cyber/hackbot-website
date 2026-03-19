@@ -37,9 +37,14 @@ export async function POST(
   let downloadUrl = plugin.source_url;
 
   if (plugin.file_path) {
+    const isZip = plugin.file_path.endsWith(".zip") || plugin.file_path.endsWith(".tar.gz") || plugin.file_path.endsWith(".tgz");
+    const downloadFilename = isZip ? plugin.file_path.split('/').pop() : `${params.slug}.py`;
+
     const { data: signedUrl } = await supabase.storage
       .from("plugins")
-      .createSignedUrl(plugin.file_path, 300); // 5 min
+      .createSignedUrl(plugin.file_path, 300, {
+        download: downloadFilename
+      }); // 5 min
 
     if (signedUrl) {
       downloadUrl = signedUrl.signedUrl;

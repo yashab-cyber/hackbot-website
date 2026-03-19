@@ -13,7 +13,7 @@ function LoginContent() {
   
   useEffect(() => {
     if (searchParams.get("from") === "academy") {
-      toast.error("go in acadmey sighn in", {
+      toast.error("want to go in academy login or sign up first", {
         duration: 4000,
         position: 'top-center',
       });
