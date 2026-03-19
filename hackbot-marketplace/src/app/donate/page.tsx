@@ -5,9 +5,11 @@ const MarketplaceScene = dynamic(() => import("@/components/three/MarketplaceSce
   ssr: false,
 });
 
-export const metadata = {
-  title: "Donate - HackBot",
-  description: "Support the development of HackBot",
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Donate",
+  description: "Support the open-source development of HackBot and its community.",
 };
 
 export default function DonatePage() {

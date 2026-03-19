@@ -7,6 +7,12 @@ import { Package } from "lucide-react";
 import PluginCard from "@/components/marketplace/PluginCard";
 import FilterBar from "@/components/marketplace/FilterBar";
 import type { Plugin } from "@/types";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Plugin Marketplace",
+  description: "Discover, download, and share HackBot plugins built by the security community.",
+};
 
 const MarketplaceScene = dynamic(
   () => import("@/components/three/MarketplaceScene"),

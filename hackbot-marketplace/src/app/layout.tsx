@@ -15,8 +15,14 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://hackbot.yashab-cyber.com";
+
 export const metadata: Metadata = {
-  title: "HackBot — AI Cybersecurity Assistant & Plugin Marketplace",
+  metadataBase: new URL(siteUrl),
+  title: {
+    template: "%s | HackBot",
+    default: "HackBot — AI Cybersecurity Assistant & Plugin Marketplace",
+  },
   description:
     "Production-ready AI-powered pentesting assistant with autonomous Agent Mode, 10 AI providers, 30+ tool integrations, and a community plugin marketplace.",
   keywords: [
@@ -30,10 +36,39 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Yashab Alam" }],
   openGraph: {
-    title: "HackBot — AI Cybersecurity Assistant & Plugin Marketplace",
+    title: "HackBot — AI Cybersecurity Assistant",
     description:
       "Production-ready AI-powered pentesting assistant with a community-driven plugin marketplace.",
+    url: siteUrl,
+    siteName: "HackBot",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 800,
+        height: 600,
+        alt: "HackBot Logo",
+      },
+    ],
+    locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HackBot — AI Cybersecurity Assistant",
+    description: "Production-ready AI-powered pentesting assistant with a community-driven plugin marketplace.",
+    images: ["/images/logo.png"],
+    creator: "@yashab_cyber",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

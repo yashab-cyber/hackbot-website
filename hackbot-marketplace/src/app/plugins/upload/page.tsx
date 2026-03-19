@@ -6,6 +6,12 @@ import { Upload, AlertCircle, CheckCircle, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { PLUGIN_CATEGORIES, type PluginCategory } from "@/types";
 import toast from "react-hot-toast";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Upload Plugin",
+  robots: { index: false, follow: false },
+};
 
 export default function UploadPluginPage() {
   const router = useRouter();
