@@ -131,12 +131,20 @@ export default function AdminDashboard() {
               <p className="text-sm text-gray-500">Manage the HackBot Plugin Marketplace</p>
             </div>
           </div>
-          <Link
-            href="/marketplace"
-            className="flex items-center gap-2 text-sm text-gray-400 hover:text-hb-accent transition-colors"
-          >
-            <ArrowLeft size={16} /> Back to Marketplace
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin/courses"
+              className="px-4 py-2 bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30 border border-indigo-500/30 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+            >
+              <BookOpen size={16} /> Manage Academy
+            </Link>
+            <Link
+              href="/marketplace"
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-hb-accent transition-colors hidden sm:flex"
+            >
+              <ArrowLeft size={16} /> Back to Marketplace
+            </Link>
+          </div>
         </div>
 
         {/* Stats Grid */}

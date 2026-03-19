@@ -314,3 +314,34 @@ CREATE POLICY "Certificates are viewable by everyone" ON public.certificates
 
 CREATE POLICY "Authenticated users can create certificates" ON public.certificates
   FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- Admin management for Courses & Exams
+CREATE POLICY "Admins can insert courses" ON public.courses
+  FOR INSERT WITH CHECK (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
+
+CREATE POLICY "Admins can update courses" ON public.courses
+  FOR UPDATE USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
+
+CREATE POLICY "Admins can delete courses" ON public.courses
+  FOR DELETE USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
+
+CREATE POLICY "Admins can insert exams" ON public.exams
+  FOR INSERT WITH CHECK (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
+
+CREATE POLICY "Admins can update exams" ON public.exams
+  FOR UPDATE USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
+
+CREATE POLICY "Admins can delete exams" ON public.exams
+  FOR DELETE USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
