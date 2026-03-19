@@ -32,8 +32,9 @@ export async function middleware(req: NextRequest) {
   // Protect Academy Routes
   if (!user && req.nextUrl.pathname.startsWith("/academy")) {
     const url = req.nextUrl.clone();
-    url.pathname = "/"; 
-    // You could append ?login=true or similar if desired
+    url.pathname = "/login";
+    url.searchParams.set("from", "academy");
+    url.searchParams.set("next", req.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
 
