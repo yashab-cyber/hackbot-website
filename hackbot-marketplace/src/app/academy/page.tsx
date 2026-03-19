@@ -6,12 +6,6 @@ import { BookOpen, Shield, Award, Clock, ArrowRight, Loader2 } from "lucide-reac
 import { createClient } from "@/lib/supabase/client";
 import { Course } from "@/types";
 import dynamic from "next/dynamic";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Academy",
-  description: "Learn cybersecurity concepts, test your skills, and earn verifiable certificates.",
-};
 
 const MarketplaceScene = dynamic(() => import("@/components/three/MarketplaceScene"), {
   ssr: false,

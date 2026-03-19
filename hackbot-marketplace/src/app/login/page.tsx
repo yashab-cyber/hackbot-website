@@ -5,12 +5,6 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import toast from "react-hot-toast";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Login",
-  description: "Sign in to HackBot to view your dashboard, plugins, and academy courses.",
-};
 
 function LoginContent() {
   const searchParams = useSearchParams();

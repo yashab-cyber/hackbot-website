@@ -11,12 +11,6 @@ import {
 import { createClient } from "@/lib/supabase/client";
 import toast from "react-hot-toast";
 import type { Plugin } from "@/types";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Dashboard",
-  robots: { index: false, follow: false },
-};
 
 export default function DashboardPage() {
   const router = useRouter();
