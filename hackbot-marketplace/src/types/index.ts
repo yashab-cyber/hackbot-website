@@ -88,6 +88,7 @@ export interface Course {
   title: string;
   description: string;
   content: string;
+  youtube_link?: string;
   created_at: string;
 }
 

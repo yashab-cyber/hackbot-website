@@ -18,6 +18,7 @@ export default function NewCoursePage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
+  const [youtubeLink, setYoutubeLink] = useState("");
 
   useEffect(() => {
     async function checkAdmin() {
@@ -46,7 +47,8 @@ export default function NewCoursePage() {
       .insert({
         title,
         description,
-        content
+        content,
+        youtube_link: youtubeLink || null
       })
       .select()
       .single();
@@ -122,6 +124,19 @@ export default function NewCoursePage() {
                 rows={2}
                 maxLength={250}
                 className="w-full px-4 py-3 bg-hb-bg border border-hb-border focus:border-hb-accent focus:ring-1 focus:ring-hb-accent rounded-xl text-white outline-none transition-all resize-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                YouTube Video Link (Optional)
+              </label>
+              <input
+                type="url"
+                value={youtubeLink}
+                onChange={(e) => setYoutubeLink(e.target.value)}
+                placeholder="e.g. https://www.youtube.com/watch?v=..."
+                className="w-full px-4 py-3 bg-hb-bg border border-hb-border focus:border-hb-accent focus:ring-1 focus:ring-hb-accent rounded-xl text-white outline-none transition-all"
               />
             </div>
 

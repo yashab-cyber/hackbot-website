@@ -7,6 +7,13 @@ import { createClient } from "@/lib/supabase/client";
 import { Course } from "@/types";
 import { BookOpen, ArrowLeft, Loader2, PlayCircle, ShieldCheck } from "lucide-react";
 
+function getYouTubeId(url: string | undefined): string | null {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+}
+
 export default function CourseViewerPage() {
   const params = useParams();
   const router = useRouter();
@@ -91,6 +98,18 @@ export default function CourseViewerPage() {
           
           <hr className="border-hb-border mb-8" />
           
+          {course.youtube_link && getYouTubeId(course.youtube_link) && (
+            <div className="mb-10 rounded-2xl overflow-hidden shadow-2xl border border-white/10 aspect-video relative">
+              <iframe
+                src={`https://www.youtube.com/embed/${getYouTubeId(course.youtube_link)}`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute top-0 left-0 w-full h-full"
+              ></iframe>
+            </div>
+          )}
+
           <div className="prose prose-invert prose-hb max-w-none text-gray-300">
             {/* Simple content renderer splitting by double newline to render paragraphs */}
             {course.content.split("\\n\\n").map((paragraph, i) => (

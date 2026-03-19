@@ -267,6 +267,7 @@ CREATE TABLE IF NOT EXISTS public.courses (
   title TEXT NOT NULL,
   description TEXT NOT NULL,
   content TEXT NOT NULL,
+  youtube_link TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
