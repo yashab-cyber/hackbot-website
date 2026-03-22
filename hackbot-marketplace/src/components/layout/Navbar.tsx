@@ -78,6 +78,7 @@ export default function Navbar() {
           <NavLink href="/">Home</NavLink>
           <NavLink href="/marketplace">Marketplace</NavLink>
           <NavLink href="/academy">Academy</NavLink>
+          <NavLink href="/blog">Blog</NavLink>
           <NavLink href="/marketplace?featured=true">Top Starred</NavLink>
           <NavLink href="/donate">Donate</NavLink>
           <NavLink href="https://github.com/yashab-cyber/hackbot" external>
@@ -175,6 +176,7 @@ export default function Navbar() {
             <MobileLink href="/" onClick={() => setMenuOpen(false)}>Home</MobileLink>
             <MobileLink href="/marketplace" onClick={() => setMenuOpen(false)}>Marketplace</MobileLink>
             <MobileLink href="/academy" onClick={() => setMenuOpen(false)}>Academy</MobileLink>
+            <MobileLink href="/blog" onClick={() => setMenuOpen(false)}>Blog</MobileLink>
             <MobileLink href="/marketplace?featured=true" onClick={() => setMenuOpen(false)}>Top Starred</MobileLink>
             <MobileLink href="/donate" onClick={() => setMenuOpen(false)}>Donate</MobileLink>
             {user ? (
