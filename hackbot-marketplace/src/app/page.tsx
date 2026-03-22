@@ -590,6 +590,26 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+      {/* ═══ JSON-LD Structured Data ═══ */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "HackBot",
+            "operatingSystem": "Linux, Windows, macOS",
+            "applicationCategory": "SecurityApplication",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "description": "Production-ready AI-powered pentesting assistant with autonomous Agent Mode, 10 AI providers, 30+ tool integrations, and a community plugin marketplace.",
+            "url": "https://hackbot.yashab-cyber.com"
+          })
+        }}
+      />
     </>
   );
 }
