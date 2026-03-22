@@ -114,3 +114,14 @@ export interface Certificate {
   student_name: string;
   issued_at: string;
 }
+
+export interface Blog {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  published: boolean;
+  author_id: string;
+  created_at: string;
+  updated_at: string;
+}

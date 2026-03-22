@@ -133,6 +133,12 @@ export default function AdminDashboard() {
           </div>
           <div className="flex items-center gap-3">
             <Link
+              href="/admin/blog"
+              className="px-4 py-2 bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 border border-emerald-500/30 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+            >
+              <BookOpen size={16} /> Manage Blog
+            </Link>
+            <Link
               href="/admin/courses"
               className="px-4 py-2 bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30 border border-indigo-500/30 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
             >

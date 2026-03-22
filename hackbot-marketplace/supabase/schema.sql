@@ -346,3 +346,51 @@ CREATE POLICY "Admins can delete exams" ON public.exams
   FOR DELETE USING (
     EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
   );
+
+-- =============================================================
+-- HackBot Blog Schema Additions
+-- =============================================================
+
+-- ─── Blogs Table ────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS public.blogs (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  title TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  content TEXT NOT NULL,
+  published BOOLEAN DEFAULT FALSE,
+  author_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─── Indexes ────────────────────────────────────────────────
+CREATE INDEX IF NOT EXISTS idx_blogs_slug ON public.blogs(slug);
+CREATE INDEX IF NOT EXISTS idx_blogs_published ON public.blogs(published) WHERE published = TRUE;
+
+-- ─── Row Level Security ─────────────────────────────────────
+ALTER TABLE public.blogs ENABLE ROW LEVEL SECURITY;
+
+-- Public can read published blogs
+CREATE POLICY "Published blogs are viewable by everyone" ON public.blogs
+  FOR SELECT USING (published = TRUE);
+
+-- Admin management for Blogs
+CREATE POLICY "Admins can view all blogs" ON public.blogs
+  FOR SELECT USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
+
+CREATE POLICY "Admins can insert blogs" ON public.blogs
+  FOR INSERT WITH CHECK (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
+
+CREATE POLICY "Admins can update blogs" ON public.blogs
+  FOR UPDATE USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
+
+CREATE POLICY "Admins can delete blogs" ON public.blogs
+  FOR DELETE USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE profiles.id = auth.uid() AND profiles.username = 'yashab-cyber')
+  );
