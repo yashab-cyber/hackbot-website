@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Read the latest news, updates, and tutorials from the HackBot team.",
+  title: "Blog - Hacker Tutorials",
+  description: "Read the latest tutorials on how to hack ethically, penetration testing tools, and ethical hacking tools curated by HackBot.",
 };
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {

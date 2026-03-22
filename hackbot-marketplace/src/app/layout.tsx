@@ -24,21 +24,22 @@ export const metadata: Metadata = {
     default: "HackBot — AI Cybersecurity Assistant & Plugin Marketplace",
   },
   description:
-    "Production-ready AI-powered pentesting assistant with autonomous Agent Mode, 10 AI providers, 30+ tool integrations, and a community plugin marketplace.",
+    "Discover the best cybersecurity tools and penetration testing tools with HackBot. An AI-powered assistant for ethical hacking, featuring a community marketplace with a comprehensive kali linux tools list to learn how to hack ethically.",
   keywords: [
+    "ethical hacking tools",
+    "best cybersecurity tools",
+    "kali linux tools list",
+    "how to hack ethically",
+    "penetration testing tools",
     "hackbot",
-    "cybersecurity",
-    "penetration testing",
-    "AI",
-    "plugins",
-    "marketplace",
-    "security tools",
+    "hackbot 3.0",
+    "hack bot ai",
   ],
   authors: [{ name: "Yashab Alam" }],
   openGraph: {
     title: "HackBot — AI Cybersecurity Assistant",
     description:
-      "Production-ready AI-powered pentesting assistant with a community-driven plugin marketplace.",
+      "Discover the best cybersecurity tools and penetration testing tools with HackBot. An AI-powered assistant for ethical hacking, featuring a community marketplace with a comprehensive kali linux tools list to learn how to hack ethically.",
     url: siteUrl,
     siteName: "HackBot",
     images: [
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "HackBot — AI Cybersecurity Assistant",
-    description: "Production-ready AI-powered pentesting assistant with a community-driven plugin marketplace.",
+    description: "Discover the best cybersecurity tools and penetration testing tools with HackBot. An AI-powered assistant for ethical hacking, featuring a community marketplace with a comprehensive kali linux tools list to learn how to hack ethically.",
     images: ["/images/logo.png"],
     creator: "@yashab_cyber",
   },
