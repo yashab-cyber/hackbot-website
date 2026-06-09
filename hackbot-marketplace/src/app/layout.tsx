@@ -3,8 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from "react-hot-toast";
-import Script from "next/script";
 import "./globals.css";
+
 
 
 const inter = Inter({
@@ -87,13 +87,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body className="font-sans bg-hb-bg text-gray-200 antialiased">
-        <Script
+      <head>
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1281631949143820"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
+      </head>
+      <body className="font-sans bg-hb-bg text-gray-200 antialiased">
         <Toaster
           position="bottom-right"
           toastOptions={{
