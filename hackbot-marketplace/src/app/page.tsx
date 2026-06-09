@@ -184,7 +184,7 @@ export default function HomePage() {
             <a href="https://github.com/yashab-cyber/hackbot" target="_blank" rel="noopener" className="px-5 sm:px-8 py-3 sm:py-4 border border-hb-accent/50 text-hb-accent font-semibold rounded-xl hover:bg-hb-accent/10 hover:border-hb-accent transition-all text-xs sm:text-sm flex items-center gap-2">
               <Star size={18} /> View on GitHub
             </a>
-            <a href="https://discord.gg/X2tgYHXYq" target="_blank" rel="noopener" className="px-5 sm:px-8 py-3 sm:py-4 bg-hb-discord/90 text-white font-semibold rounded-xl hover:bg-hb-discord hover:shadow-[0_0_30px_rgba(88,101,242,0.35)] transition-all text-xs sm:text-sm">
+            <a href="https://discord.gg/JwE2btCUD" target="_blank" rel="noopener" className="px-5 sm:px-8 py-3 sm:py-4 bg-hb-discord/90 text-white font-semibold rounded-xl hover:bg-hb-discord hover:shadow-[0_0_30px_rgba(88,101,242,0.35)] transition-all text-xs sm:text-sm">
               Join Discord
             </a>
           </motion.div>

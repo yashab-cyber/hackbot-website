@@ -84,7 +84,7 @@ export default function Navbar() {
           <NavLink href="https://github.com/yashab-cyber/hackbot" external>
             GitHub
           </NavLink>
-          <NavLink href="https://discord.gg/X2tgYHXYq" external>
+          <NavLink href="https://discord.gg/JwE2btCUD" external>
             Discord
           </NavLink>
         </div>

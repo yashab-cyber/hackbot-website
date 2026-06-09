@@ -54,7 +54,7 @@ export default function DonatePage() {
             </a>
             
             <a
-              href="https://discord.gg/X2tgYHXYq"
+              href="https://discord.gg/JwE2btCUD"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-[#5865F2]/10 hover:bg-[#5865F2]/20 border border-[#5865F2]/30 text-[#5865F2] hover:text-white rounded-xl font-medium transition-colors flex-shrink-0"
