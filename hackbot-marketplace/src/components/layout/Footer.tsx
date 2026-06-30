@@ -51,19 +51,15 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* About */}
+          {/* About & Legal */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">About</h4>
+            <h4 className="text-sm font-semibold text-white mb-4">About & Legal</h4>
             <div className="flex flex-col gap-2">
-              <FooterLink href="https://github.com/yashab-cyber" external>
-                Yashab Alam
-              </FooterLink>
-              <FooterLink href="mailto:yashabalam707@gmail.com" external>
-                Contact
-              </FooterLink>
-              <FooterLink href="https://github.com/yashab-cyber/hackbot/blob/main/LICENSE" external>
-                MIT License
-              </FooterLink>
+              <FooterLink href="/about">About Us</FooterLink>
+              <FooterLink href="/contact">Contact Us</FooterLink>
+              <FooterLink href="/privacy">Privacy Policy</FooterLink>
+              <FooterLink href="/terms">Terms & Conditions</FooterLink>
+              <FooterLink href="/disclaimer">Disclaimer</FooterLink>
             </div>
           </div>
         </div>
