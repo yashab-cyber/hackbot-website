@@ -34,7 +34,7 @@ export default function TermsAndConditionsPage() {
               Welcome to <strong>HackBot</strong>!
             </p>
             <p>
-              These terms and conditions outline the rules and regulations for the use of HackBot's Website, located at <a href="https://hackbot.yashab-cyber.com" className="text-hb-accent hover:underline">https://hackbot.yashab-cyber.com</a>.
+              These terms and conditions outline the rules and regulations for the use of HackBot&apos;s Website, located at <a href="https://hackbot.yashab-cyber.com" className="text-hb-accent hover:underline">https://hackbot.yashab-cyber.com</a>.
             </p>
             <p>
               By accessing this website, we assume you accept these terms and conditions. Do not continue to use HackBot if you do not agree to take all of the terms and conditions stated on this page.
@@ -101,7 +101,7 @@ export default function TermsAndConditionsPage() {
                 <Award className="w-5 h-5 text-hb-accent" /> 4. Disclaimer of Warranties
               </h2>
               <p>
-                This website and its contents are provided "as is", with all faults, and HackBot makes no express or implied representations or warranties of any kind related to this website or the materials contained on this website. 
+                This website and its contents are provided &quot;as is&quot;, with all faults, and HackBot makes no express or implied representations or warranties of any kind related to this website or the materials contained on this website. 
               </p>
               <p>
                 We do not warrant that the website or its tools will be uninterrupted, error-free, secure, or free of viruses or other harmful components. Use of this website is entirely at your own risk.

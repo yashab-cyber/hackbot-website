@@ -68,10 +68,10 @@ export default function DisclaimerPage() {
             {/* Section 3 */}
             <div className="space-y-3">
               <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-hb-accent" /> 3. Accuracy and "As-Is" Provision
+                <AlertTriangle className="w-5 h-5 text-hb-accent" /> 3. Accuracy and &quot;As-Is&quot; Provision
               </h2>
               <p>
-                Cybersecurity is a rapidly changing field. Exploit code, vulnerability scanners, and plugins may contain bugs, fail under certain environments, or become outdated. All materials on HackBot are provided "as-is" without warranty of any kind. We do not guarantee that the information is 100% accurate, safe, or compatible with your systems.
+                Cybersecurity is a rapidly changing field. Exploit code, vulnerability scanners, and plugins may contain bugs, fail under certain environments, or become outdated. All materials on HackBot are provided &quot;as-is&quot; without warranty of any kind. We do not guarantee that the information is 100% accurate, safe, or compatible with your systems.
               </p>
             </div>
 

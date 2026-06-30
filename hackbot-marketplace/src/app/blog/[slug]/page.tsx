@@ -101,7 +101,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 ? <code className="bg-black/50 rounded-md px-1.5 py-0.5 font-mono text-[0.85em] text-emerald-300 border border-white/10" {...props} />
                 : <code className="block bg-[#0a0e17] p-4 rounded-xl font-mono text-sm text-gray-300 overflow-x-auto my-6 border border-hb-border" {...props} />,
               pre: ({node, ...props}) => <pre className="p-0 m-0 bg-transparent" {...props} />,
-              img: ({node, ...props}) => <img className="rounded-xl max-w-full h-auto my-8 border border-hb-border shadow-lg" {...props} />,
+              // eslint-disable-next-line @next/next/no-img-element
+              img: ({node, ...props}) => <img className="rounded-xl max-w-full h-auto my-8 border border-hb-border shadow-lg" alt={props.alt || ""} {...props} />,
               hr: ({node, ...props}) => <hr className="my-10 border-hb-border" {...props} />,
               table: ({node, ...props}) => <div className="overflow-x-auto my-8"><table className="w-full text-left border-collapse" {...props} /></div>,
               th: ({node, ...props}) => <th className="border-b-2 border-hb-border p-4 text-white font-semibold bg-white/5" {...props} />,
