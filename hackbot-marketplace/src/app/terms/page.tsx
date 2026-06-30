@@ -34,7 +34,7 @@ export default function TermsAndConditionsPage() {
               Welcome to <strong>HackBot</strong>!
             </p>
             <p>
-              These terms and conditions outline the rules and regulations for the use of HackBot&apos;s Website, located at <a href="https://hackbot.yashab-cyber.com" className="text-hb-accent hover:underline">https://hackbot.yashab-cyber.com</a>.
+              These terms and conditions outline the rules and regulations for the use of HackBot&apos;s Website, located at <a href="https://hackbot.co.in" className="text-hb-accent hover:underline">https://hackbot.co.in</a>.
             </p>
             <p>
               By accessing this website, we assume you accept these terms and conditions. Do not continue to use HackBot if you do not agree to take all of the terms and conditions stated on this page.

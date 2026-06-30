@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { createRouteClient } from "@/lib/supabase/server";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://hackbot.yashab-cyber.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://hackbot.co.in";
   const supabase = createRouteClient();
 
   // Fetch dynamic plugins

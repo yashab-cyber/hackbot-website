@@ -606,7 +606,7 @@ export default function HomePage() {
               "priceCurrency": "USD"
             },
             "description": "Production-ready AI-powered pentesting assistant with autonomous Agent Mode, 10 AI providers, 30+ tool integrations, and a community plugin marketplace.",
-            "url": "https://hackbot.yashab-cyber.com"
+            "url": "https://hackbot.co.in"
           })
         }}
       />

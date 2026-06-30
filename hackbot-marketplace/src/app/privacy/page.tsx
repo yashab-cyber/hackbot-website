@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
 
           <div className="prose prose-invert max-w-none text-gray-300 space-y-8 text-sm md:text-base leading-relaxed">
             <p>
-              At <strong>HackBot</strong>, accessible from <a href="https://hackbot.yashab-cyber.com" className="text-hb-accent hover:underline">https://hackbot.yashab-cyber.com</a>, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by HackBot and how we use it.
+              At <strong>HackBot</strong>, accessible from <a href="https://hackbot.co.in" className="text-hb-accent hover:underline">https://hackbot.co.in</a>, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by HackBot and how we use it.
             </p>
 
             <p>
@@ -66,7 +66,7 @@ export default function PrivacyPolicyPage() {
                 <Lock className="w-5 h-5 text-hb-accent" /> Google DoubleClick DART Cookie
               </h2>
               <p>
-                Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-hb-accent hover:underline">https://policies.google.com/technologies/ads</a>.
+                Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to hackbot.co.in and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-hb-accent hover:underline">https://policies.google.com/technologies/ads</a>.
               </p>
             </div>
 
