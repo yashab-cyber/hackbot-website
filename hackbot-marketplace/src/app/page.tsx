@@ -330,8 +330,14 @@ export default function HomePage() {
 
                 <div className="relative flex flex-col lg:flex-row items-center gap-10">
                   <div className="flex-1">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-hb-accent/10 border border-hb-accent/25 rounded-full text-xs text-hb-accent font-medium mb-5">
-                      <Sparkles size={12} /> Community Powered
+                    <div className="flex items-center gap-3 mb-5 flex-wrap">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-hb-accent/10 border border-hb-accent/25 rounded-full text-xs text-hb-accent font-medium">
+                        <Sparkles size={12} /> Community Powered
+                      </div>
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-hb-accent/10 border border-hb-accent/30 rounded-full text-xs font-mono font-bold text-hb-accent shadow-[0_0_15px_rgba(0,255,136,0.15)]">
+                        <span className="w-2 h-2 rounded-full bg-hb-accent animate-pulse" />
+                        CA Soon Available
+                      </div>
                     </div>
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4">
                       Plugin <span className="gradient-text">Marketplace</span>

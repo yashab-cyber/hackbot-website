@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
-import { Package } from "lucide-react";
+import { Package, Sparkles } from "lucide-react";
 import PluginCard from "@/components/marketplace/PluginCard";
 import FilterBar from "@/components/marketplace/FilterBar";
 import type { Plugin } from "@/types";
@@ -72,6 +72,20 @@ function MarketplaceContent() {
 
   return (
     <div className="min-h-screen pt-20">
+      {/* Top Banner: CA Soon Available */}
+      <div className="relative z-20 border-b border-hb-accent/20 bg-gradient-to-r from-hb-accent/10 via-emerald-500/10 to-hb-accent/10 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 py-2.5 flex items-center justify-center gap-2.5 text-xs sm:text-sm">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-hb-accent opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-hb-accent" />
+          </span>
+          <span className="text-gray-300 font-medium">HackBot Marketplace:</span>
+          <span className="font-mono font-bold tracking-wider uppercase text-hb-accent bg-hb-accent/20 px-2.5 py-0.5 rounded border border-hb-accent/40 shadow-[0_0_12px_rgba(0,255,136,0.2)]">
+            CA Soon Available
+          </span>
+        </div>
+      </div>
+
       {/* Header */}
       <section className="relative py-20 overflow-hidden">
         <MarketplaceScene />
@@ -81,8 +95,14 @@ function MarketplaceContent() {
           <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-hb-accent/10 border border-hb-accent/25 rounded-full text-xs text-hb-accent font-medium mb-6">
-            <Package size={12} /> Community Plugins
+          <div className="flex items-center justify-center gap-3 mb-6 flex-wrap">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-hb-accent/10 border border-hb-accent/25 rounded-full text-xs text-hb-accent font-medium">
+              <Package size={12} /> Community Plugins
+            </div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-hb-accent/10 border border-hb-accent/30 rounded-full text-xs font-mono font-bold text-hb-accent shadow-[0_0_15px_rgba(0,255,136,0.15)]">
+              <Sparkles size={12} className="text-hb-accent" />
+              CA: Soon Available
+            </div>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
             Plugin <span className="gradient-text">Marketplace</span>
