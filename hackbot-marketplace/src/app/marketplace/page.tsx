@@ -3,10 +3,13 @@
 import { useState, useEffect, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
-import { Package, Sparkles } from "lucide-react";
+import { Package, Sparkles, Copy, Check } from "lucide-react";
+import toast from "react-hot-toast";
 import PluginCard from "@/components/marketplace/PluginCard";
 import FilterBar from "@/components/marketplace/FilterBar";
 import type { Plugin } from "@/types";
+
+const CA_ADDRESS = "CEFY2ymHYY9AiXGwg3aiuxmidPsrHz75x7bBfBT1pump";
 
 const MarketplaceScene = dynamic(
   () => import("@/components/three/MarketplaceScene"),
@@ -20,6 +23,14 @@ function MarketplaceContent() {
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
   const [category, setCategory] = useState(searchParams.get("category") || "");
   const [sortBy, setSortBy] = useState("popular");
+  const [copied, setCopied] = useState(false);
+
+  const copyCA = () => {
+    navigator.clipboard.writeText(CA_ADDRESS);
+    setCopied(true);
+    toast.success("Contract Address copied to clipboard!");
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     async function fetchPlugins() {
@@ -72,17 +83,29 @@ function MarketplaceContent() {
 
   return (
     <div className="min-h-screen pt-20">
-      {/* Top Banner: CA Soon Available */}
+      {/* Top Banner: CA */}
       <div className="relative z-20 border-b border-hb-accent/20 bg-gradient-to-r from-hb-accent/10 via-emerald-500/10 to-hb-accent/10 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 py-2.5 flex items-center justify-center gap-2.5 text-xs sm:text-sm">
+        <div className="max-w-7xl mx-auto px-6 py-2.5 flex items-center justify-center gap-2.5 text-xs sm:text-sm flex-wrap">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-hb-accent opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-hb-accent" />
           </span>
-          <span className="text-gray-300 font-medium">HackBot Marketplace:</span>
-          <span className="font-mono font-bold tracking-wider uppercase text-hb-accent bg-hb-accent/20 px-2.5 py-0.5 rounded border border-hb-accent/40 shadow-[0_0_12px_rgba(0,255,136,0.2)]">
-            CA Soon Available
-          </span>
+          <span className="text-gray-300 font-medium">CA:</span>
+          <button
+            onClick={copyCA}
+            className="group inline-flex items-center gap-2 font-mono font-bold text-hb-accent bg-hb-accent/20 hover:bg-hb-accent/30 px-3 py-1 rounded-lg border border-hb-accent/40 shadow-[0_0_12px_rgba(0,255,136,0.2)] transition-all cursor-pointer text-xs"
+            title="Click to copy CA"
+          >
+            <span className="tracking-wider">{CA_ADDRESS}</span>
+            {copied ? (
+              <Check size={13} className="text-hb-accent shrink-0" />
+            ) : (
+              <Copy size={13} className="text-hb-accent/70 group-hover:text-hb-accent shrink-0" />
+            )}
+            <span className="text-[10px] text-hb-accent/90 bg-hb-accent/20 px-1.5 py-0.5 rounded border border-hb-accent/30">
+              {copied ? "Copied!" : "Copy"}
+            </span>
+          </button>
         </div>
       </div>
 
@@ -99,10 +122,15 @@ function MarketplaceContent() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-hb-accent/10 border border-hb-accent/25 rounded-full text-xs text-hb-accent font-medium">
               <Package size={12} /> Community Plugins
             </div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-hb-accent/10 border border-hb-accent/30 rounded-full text-xs font-mono font-bold text-hb-accent shadow-[0_0_15px_rgba(0,255,136,0.15)]">
+            <button
+              onClick={copyCA}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-hb-accent/10 hover:bg-hb-accent/20 border border-hb-accent/30 hover:border-hb-accent/50 rounded-full text-xs font-mono font-bold text-hb-accent shadow-[0_0_15px_rgba(0,255,136,0.15)] transition-all cursor-pointer"
+              title="Click to copy CA"
+            >
               <Sparkles size={12} className="text-hb-accent" />
-              CA: Soon Available
-            </div>
+              <span>CA: {CA_ADDRESS.slice(0, 6)}...{CA_ADDRESS.slice(-4)}</span>
+              {copied ? <Check size={12} className="text-hb-accent" /> : <Copy size={12} />}
+            </button>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
             Plugin <span className="gradient-text">Marketplace</span>

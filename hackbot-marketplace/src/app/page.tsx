@@ -4,14 +4,17 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import toast from "react-hot-toast";
 import {
   Bot, MessageSquare, ClipboardList, Monitor, Shield, Globe,
   Map, FileCheck, GitCompare, Target, Puzzle, Wrench, Plug,
   Brain, Earth, BarChart3, ShieldCheck, Settings,
   Download, Star, ArrowRight, Zap, Terminal, ChevronRight,
-  Sparkles, Cpu, Lock, Code2, Layers, Eye, Copy,
+  Sparkles, Cpu, Lock, Code2, Layers, Eye, Copy, Check,
 } from "lucide-react";
+
+const CA_ADDRESS = "CEFY2ymHYY9AiXGwg3aiuxmidPsrHz75x7bBfBT1pump";
 
 const HeroScene = dynamic(() => import("@/components/three/HeroScene"), {
   ssr: false,
@@ -120,6 +123,14 @@ const stats = [
 ];
 
 export default function HomePage() {
+  const [copiedCA, setCopiedCA] = useState(false);
+
+  const copyCA = () => {
+    navigator.clipboard.writeText(CA_ADDRESS);
+    setCopiedCA(true);
+    toast.success("Contract Address copied to clipboard!");
+    setTimeout(() => setCopiedCA(false), 2000);
+  };
   return (
     <>
       {/* ═══ Hero ═══ */}
@@ -170,6 +181,15 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.5 }} className="flex justify-center flex-wrap gap-3 mb-8">
+            <button
+              onClick={copyCA}
+              className="px-4 py-1.5 bg-hb-accent/10 border border-hb-accent/30 rounded-full text-xs font-mono font-bold text-hb-accent backdrop-blur-sm hover:border-hb-accent hover:bg-hb-accent/20 transition-all flex items-center gap-2 cursor-pointer shadow-[0_0_15px_rgba(0,255,136,0.15)]"
+              title="Click to copy CA"
+            >
+              <span className="w-2 h-2 rounded-full bg-hb-accent animate-pulse" />
+              <span>CA: {CA_ADDRESS.slice(0, 6)}...{CA_ADDRESS.slice(-4)}</span>
+              {copiedCA ? <Check size={12} className="text-hb-accent" /> : <Copy size={12} />}
+            </button>
             {["Python 3.9+", "MIT License", "Cross-Platform", "Plugin System"].map((b) => (
               <span key={b} className="px-4 py-1.5 bg-hb-card/60 border border-hb-border/60 rounded-full text-xs text-gray-400 font-medium backdrop-blur-sm hover:border-hb-accent/30 hover:text-hb-accent transition-all cursor-default">{b}</span>
             ))}
@@ -334,10 +354,15 @@ export default function HomePage() {
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-hb-accent/10 border border-hb-accent/25 rounded-full text-xs text-hb-accent font-medium">
                         <Sparkles size={12} /> Community Powered
                       </div>
-                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-hb-accent/10 border border-hb-accent/30 rounded-full text-xs font-mono font-bold text-hb-accent shadow-[0_0_15px_rgba(0,255,136,0.15)]">
+                      <button
+                        onClick={copyCA}
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-hb-accent/10 hover:bg-hb-accent/20 border border-hb-accent/30 hover:border-hb-accent/50 rounded-full text-xs font-mono font-bold text-hb-accent shadow-[0_0_15px_rgba(0,255,136,0.15)] transition-all cursor-pointer"
+                        title="Click to copy CA"
+                      >
                         <span className="w-2 h-2 rounded-full bg-hb-accent animate-pulse" />
-                        CA Soon Available
-                      </div>
+                        <span>CA: {CA_ADDRESS.slice(0, 6)}...{CA_ADDRESS.slice(-4)}</span>
+                        {copiedCA ? <Check size={12} className="text-hb-accent" /> : <Copy size={12} />}
+                      </button>
                     </div>
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4">
                       Plugin <span className="gradient-text">Marketplace</span>
